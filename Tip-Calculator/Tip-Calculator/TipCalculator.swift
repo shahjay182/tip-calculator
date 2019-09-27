@@ -9,12 +9,18 @@
 import Foundation
 class TipCalculator
 {
-    var amountBeforeTaxt:      Double = 0
-    var tipAmount:             Double = 0
-    var tipPercentage:         Double = 0
-    var totalAmount:           Double = 0
+    var amountBeforeTax:    Double = 0
+    var tipAmount:          Double = 0
+    var tipPercentage:      Double = 0
+    var totalAmount:        Double = 0
 
-    init(<#parameters#>) {
-        <#statements#>
+    init(amtBeforeTax: Double, tipPercent: Double) {
+        self.amountBeforeTax = amtBeforeTax
+        self.tipPercentage = tipPercent
+    }
+    
+    func calculateTip() {
+        tipAmount = amountBeforeTax * tipPercentage
+        totalAmount = tipAmount + amountBeforeTax
     }
 }

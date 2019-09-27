@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var eachPersonSlider: UISlider!
     
     
+    var tipCalculator = TipCalculator(amtBeforeTax: 0, tipPercent: 0.10)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +27,24 @@ class ViewController: UIViewController {
     }
 
     
+    @IBAction func tipSliderValueChanged(_ sender: Any) {
+        tipPercentageLabel.text = String(format: "Tip: %02%%", Int(tipPercentageSlider.value))
+        //Call the calculateTip function
+    }
     
-    func calculateBill(){
-      
+    // stand alone Function
+    
+    
+    func calculateBill() {
+        tipCalculator.tipPercentage = Double(tipPercentageSlider.value) / 100.0
+        tipCalculator.amountBeforeTax = (amountBeforeTextField.text! as NSString).doubleValue
+        tipCalculator.calculateTip()
+        //Come back and call function
+        updateUI()
+    }
+    
+    func updateUI() {
+        TotalResultLabel.text = String(format: "$0.2f", tipCalculator.totalAmount)
     }
 
 }
