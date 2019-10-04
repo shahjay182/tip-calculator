@@ -28,11 +28,19 @@ class ViewController: UIViewController {
 
     
     @IBAction func tipSliderValueChanged(_ sender: Any) {
-        tipPercentageLabel.text = String(format: "Tip: %02%%", Int(tipPercentageSlider.value))
+        tipPercentageLabel.text = String(format: "Tip: %2d%%", Int(tipPercentageSlider.value))
+        calculateBill()
         //Call the calculateTip function
     }
     
+    @IBAction func amountBeforeTextValueChanged(_ sender: Any) {
+        calculateBill()
+    }
     // stand alone Function
+    @IBAction func numberOfPeopleSliderValueChanged(_ sender: Any) {
+        numberOfPeopleLabel.text = "Split \(Int(eachPersonSlider.value))"
+        calculateBill()
+    }
     
     
     func calculateBill() {
@@ -44,7 +52,10 @@ class ViewController: UIViewController {
     }
     
     func updateUI() {
-        TotalResultLabel.text = String(format: "$0.2f", tipCalculator.totalAmount)
+        TotalResultLabel.text = String(format: "%0.2f", tipCalculator.totalAmount)
+        // each person update
+        let numberOfPeople: Int = Int(eachPersonSlider.value)
+        eachPersonAmountLabel.text = String(format:"%0.2f" , tipCalculator.totalAmount/Double(numberOfPeople))
     }
 
 }
